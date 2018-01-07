@@ -24,7 +24,7 @@ signals:
 
 protected:
 {% for property in properties %}
-    {{ property.type }} {{ property.var_name }};
+    {{ property.type }} {{ property.var_name }}{% if property.value is defined %} = {{ property.value }}{% endif %};
 {% endfor %}
 };
 
