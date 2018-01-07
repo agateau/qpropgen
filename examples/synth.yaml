@@ -1,0 +1,11 @@
+class:
+    name: AbstractSynthesizer
+    header: abstractsynthesizer.h
+    impl: abstractsynthesizer.cpp
+properties:
+    - name: baseFrequency
+      type: qreal
+    - name: waveType
+      type: int
+    - name: name
+      type: QString
