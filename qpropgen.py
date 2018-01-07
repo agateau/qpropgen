@@ -45,7 +45,10 @@ def create_property_def(property_def):
     else:
         arg_type = type_
 
-    var_name = 'm' + camelcase_name
+    try:
+        var_name = property_def['var_name']
+    except KeyError:
+        var_name = 'm' + camelcase_name
 
     property_def.update(
         setter_name=setter_name,
