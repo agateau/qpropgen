@@ -11,7 +11,11 @@
 }
 
 void {{ class_name }}::{{ property.setter_name }}({{ property.arg_type }} value) {
+    {% if property.type == 'qreal' %}
+    if (qFuzzyCompare({{ property.var_name }}, value)) {
+    {% else %}
     if ({{ property.var_name }} == value) {
+    {% endif %}
         return;
     }
     {{ property.var_name }} = value;
