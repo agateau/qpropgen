@@ -1,7 +1,5 @@
 class:
-    name: AbstractSynthesizer
-    header: abstractsynthesizer.h
-    impl: abstractsynthesizer.cpp
+    name: BaseSound
 properties:
     - name: baseFrequency
       type: qreal
