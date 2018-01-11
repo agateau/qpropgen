@@ -49,7 +49,8 @@ def generate_file(template, filename, class_def, properties, directory):
 def create_property_def(property_def):
     """Adds extra fields to property_def"""
     camelcase_name = property_def['name'][0].upper() + property_def['name'][1:]
-    setter_name = 'set' + camelcase_name
+
+    property_def.setdefault('setter_name', 'set' + camelcase_name)
 
     type_ = property_def['type']
     need_constref = type_ not in NO_CONST_REF_ARG_TYPES and type_[-1] != '*'
@@ -57,17 +58,10 @@ def create_property_def(property_def):
         arg_type = 'const {}&'.format(type_)
     else:
         arg_type = type_
+    property_def.setdefault('arg_type', arg_type)
 
-    try:
-        var_name = property_def['var_name']
-    except KeyError:
-        var_name = 'm' + camelcase_name
+    property_def.setdefault('var_name', 'm' + camelcase_name)
 
-    property_def.update(
-        setter_name=setter_name,
-        arg_type=arg_type,
-        var_name=var_name,
-    )
     return property_def
 
 
