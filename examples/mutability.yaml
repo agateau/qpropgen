@@ -1,0 +1,11 @@
+class:
+    name: Mutability
+properties:
+    - name: firstname
+      type: string
+    - name: age
+      type: int
+      mutability: readonly
+    - name: size
+      type: int
+      mutability: constant

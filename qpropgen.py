@@ -27,6 +27,8 @@ IMPL_EXT = '.cpp'
 DEFAULT_ACCESS = 'private'
 VALID_ACCESS_VALUES = {'private', 'protected'}
 
+DEFAULT_MUTABILITY = 'readwrite'
+
 
 def get_filename_we(filepath):
     filename = os.path.basename(filepath)
@@ -48,6 +50,8 @@ def complete_property(property_):
     property_.setdefault('arg_type', arg_type)
 
     property_.setdefault('var_name', 'm' + camelcase_name)
+
+    property_.setdefault('mutability', DEFAULT_MUTABILITY)
 
     return property_
 

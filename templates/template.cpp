@@ -10,6 +10,7 @@
     return {{ property.var_name }};
 }
 
+{%- if property.mutability == 'readwrite' %}
 void {{ class_name }}::{{ property.setter_name }}({{ property.arg_type }} value) {
     {% if property.type == 'qreal' %}
     if (qFuzzyCompare({{ property.var_name }}, value)) {
@@ -21,4 +22,5 @@ void {{ class_name }}::{{ property.setter_name }}({{ property.arg_type }} value)
     {{ property.var_name }} = value;
     {{ property.name }}Changed(value);
 }
+{%- endif %}
 {% endfor %}

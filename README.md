@@ -21,6 +21,9 @@ A property definition must have the following fields:
 
 It may have the following fields:
 
+- `mutability`: One of `constant`, `readonly`, `readwrite`. Defaults to
+  `readwrite`.
+
 - `arg_type`: The type of the setter argument. If not set qpropgen uses const
   refs for types which are not pointers and not known scalars (int, bool,
   qreal)

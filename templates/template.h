@@ -8,18 +8,29 @@
 class {{ class_name }} : public QObject {
     Q_OBJECT
 {% for property in properties %}
-    Q_PROPERTY({{ property.type }} {{ property.name }} READ {{ property.name }} WRITE {{ property.setter_name }} NOTIFY {{ property.name}}Changed)
+    Q_PROPERTY({{ property.type }} {{ property.name }} READ {{ property.name }}
+    {%- if property.mutability == 'readwrite' %}
+            WRITE {{ property.setter_name }}
+    {%- endif %}
+    {%- if property.mutability == 'constant' %}
+            CONSTANT
+    {%- else %}
+            NOTIFY {{ property.name}}Changed
+    {%- endif %}
+    )
 {% endfor %}
 public:
     explicit {{ class_name }}(QObject* parent = nullptr);
 
 {% for property in properties %}
     {{ property.type }} {{ property.name }}() const;
+    {%- if property.mutability == 'readwrite' %}
     void {{property.setter_name }}({{ property.arg_type }} value);
+    {%- endif %}
 {% endfor %}
 
 signals:
-{% for property in properties %}
+{% for property in properties if property.mutability != 'constant' %}
     void {{property.name }}Changed({{ property.arg_type }} value);
 {% endfor %}
 
