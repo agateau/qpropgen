@@ -10,6 +10,7 @@ Create a class definition, using the following syntax:
 
     class:
         name: Person
+        access: private|protected (defaults to private)
     properties:
         - <property definition>
 

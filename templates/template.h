@@ -23,7 +23,7 @@ signals:
     void {{property.name }}Changed({{ property.arg_type }} value);
 {% endfor %}
 
-protected:
+{{ access }}:
 {% for property in properties %}
     {{ property.type }} {{ property.var_name }}{% if property.value is defined %} = {{ property.value }}{% endif %};
 {% endfor %}
