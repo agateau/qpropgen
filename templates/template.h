@@ -5,12 +5,12 @@
 
 #include <QObject>
 
-class {{ class_name }} : public QObject {
+class {{ className }} : public QObject {
     Q_OBJECT
 {% for property in properties %}
     Q_PROPERTY({{ property.type }} {{ property.name }} READ {{ property.name }}
     {%- if property.mutability == 'readwrite' %}
-            WRITE {{ property.setter_name }}
+            WRITE {{ property.setterName }}
     {%- endif %}
     {%- if property.mutability == 'constant' %}
             CONSTANT
@@ -20,23 +20,23 @@ class {{ class_name }} : public QObject {
     )
 {% endfor %}
 public:
-    explicit {{ class_name }}(QObject* parent = nullptr);
+    explicit {{ className }}(QObject* parent = nullptr);
 
 {% for property in properties %}
     {{ property.declaration_prefix }} {{ property.type }} {{ property.name }}() const {{- property.declaration_suffix }};
     {%- if property.mutability == 'readwrite' %}
-    {{ property.declaration_prefix }} void {{property.setter_name }}({{ property.arg_type }} value) {{- property.declaration_suffix }};
+    {{ property.declaration_prefix }} void {{property.setterName }}({{ property.argType }} value) {{- property.declaration_suffix }};
     {%- endif %}
 {% endfor %}
 
 signals:
 {% for property in properties if property.mutability != 'constant' %}
-    void {{property.name }}Changed({{ property.arg_type }} value);
+    void {{property.name }}Changed({{ property.argType }} value);
 {% endfor %}
 
 {{ access }}:
 {% for property in properties %}
-    {{ property.type }} {{ property.var_name }}{% if property.value is defined %} = {{ property.value }}{% endif %};
+    {{ property.type }} {{ property.varName }}{% if property.value is defined %} = {{ property.value }}{% endif %};
 {% endfor %}
 };
 
