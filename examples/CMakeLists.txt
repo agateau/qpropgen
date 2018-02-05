@@ -9,6 +9,7 @@ qpropgen(QPROPGEN_SOURCES
     impl.yaml
     includes.yaml
     mutability.yaml
+    usebaseclass.yaml
 )
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})

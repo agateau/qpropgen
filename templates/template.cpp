@@ -2,7 +2,7 @@
 #include <{{ header }}>
 
 {{ className }}::{{ className }}(QObject* parent)
-    : QObject(parent) {
+    : {{ baseClassName }}(parent) {
 }
 
 {% for property in properties if not property.impl == 'pure' %}

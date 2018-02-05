@@ -38,6 +38,8 @@ It may also contain the following fields:
 
 - `includes`: a list of files to include in the header
 
+- `baseClass`: name of the class to inherit from. Defaults to `QObject`.
+
 ### `properties`
 
 `properties` is an array of property definitions.

@@ -9,7 +9,7 @@
 #include <{{include}}>
 {%- endfor %}
 
-class {{ className }} : public QObject {
+class {{ className }} : public {{ baseClassName }} {
     Q_OBJECT
 {% for property in properties %}
     Q_PROPERTY({{ property.type }} {{ property.name }} READ {{ property.name }}

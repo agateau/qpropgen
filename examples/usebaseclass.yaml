@@ -1,0 +1,7 @@
+class: UseBaseClass
+includes:
+    - QAbstractListModel
+baseClass: QAbstractListModel
+properties:
+    - name: foo
+      type: int
