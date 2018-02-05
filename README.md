@@ -2,19 +2,52 @@
 
 Generates classes containing Qt properties.
 
-## Usage
+## Quick Intro
 
-### Create a class definition
+Suppose we want to create a Person class, with firstName, lastName and
+birthDate properties.
 
-Create a class definition, using the following syntax:
+First create a class definition file named person.yaml with the following
+content:
 
     class:
         name: Person
-        access: private|protected (defaults to private)
     properties:
-        - <property definition>
+        - name: firstName
+          type: QString
+        - name: lastName
+          type: QString
+        - name: birthDate
+          type: QDateTime
 
-A property definition must have the following fields:
+Next, generate its header and implementation with `qpropgen person.yaml`
+
+You can now use person.h and person.cpp in your code. The filenames are defined
+from the filename of the class definition.
+
+## Class definition syntax
+
+A class definition contains the following fields:
+
+- `class`
+- `properties`
+
+### `class`
+
+`class` must contains the following fields:
+
+- `name`: Class name
+
+It may also contain the following fields:
+
+- `access`: Can be `private` or `protected`. Access modifier for generated
+  member variables. Defaults to `private`.
+
+### `properties`
+
+`properties` is an array of property definitions.
+
+A property definition must contain the following fields:
 
 - `type`
 - `name`
@@ -37,6 +70,7 @@ It may have the following fields:
 - `impl`: One of `plain` (getter and setter), `virtual` (virtual getter and
   setter) or `pure` (virtual pure getter and setter)
 
-### Generate the class
+## Build system integration
 
-Generate it with `qpropgen person.yaml`
+qpropgen comes with CMake support. Look at `examples/CMakeLists.txt` for
+details.
