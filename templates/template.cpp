@@ -5,7 +5,7 @@
     : QObject(parent) {
 }
 
-{% for property in properties %}
+{% for property in properties if not property.impl == 'pure' %}
 {{ property.type }} {{ class_name }}::{{ property.name }}() const {
     return {{ property.var_name }};
 }

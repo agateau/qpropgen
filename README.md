@@ -34,6 +34,9 @@ It may have the following fields:
 - `var_name`: Name of the variable backing the property. Defaults to `m<Name>`,
   so the variable of a property named `foo` will be `mFoo`.
 
+- `impl`: One of `plain` (getter and setter), `virtual` (virtual getter and
+  setter) or `pure` (virtual pure getter and setter)
+
 ### Generate the class
 
 Generate it with `qpropgen person.yaml`

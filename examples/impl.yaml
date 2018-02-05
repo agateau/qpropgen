@@ -1,0 +1,11 @@
+class:
+    name: Implementation
+properties:
+    - name: plain
+      type: int
+    - name: virt
+      type: int
+      impl: virtual
+    - name: pure
+      type: int
+      impl: pure

@@ -29,6 +29,10 @@ VALID_ACCESS_VALUES = {'private', 'protected'}
 
 DEFAULT_MUTABILITY = 'readwrite'
 
+DEFAULT_IMPL = 'plain'
+VIRTUAL_IMPL = 'virtual'
+PURE_IMPL = 'pure'
+
 
 def get_filename_we(filepath):
     filename = os.path.basename(filepath)
@@ -52,6 +56,17 @@ def complete_property(property_):
     property_.setdefault('var_name', 'm' + camelcase_name)
 
     property_.setdefault('mutability', DEFAULT_MUTABILITY)
+
+    impl = property_.setdefault('impl', DEFAULT_IMPL)
+    if impl == VIRTUAL_IMPL:
+        prefix, suffix = 'virtual', ''
+    elif impl == PURE_IMPL:
+        prefix, suffix = 'virtual', ' = 0'
+    else:
+        prefix, suffix = '', ''
+
+    property_['declaration_prefix'] = prefix
+    property_['declaration_suffix'] = suffix
 
     return property_
 

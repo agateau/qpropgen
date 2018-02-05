@@ -23,9 +23,9 @@ public:
     explicit {{ class_name }}(QObject* parent = nullptr);
 
 {% for property in properties %}
-    {{ property.type }} {{ property.name }}() const;
+    {{ property.declaration_prefix }} {{ property.type }} {{ property.name }}() const {{- property.declaration_suffix }};
     {%- if property.mutability == 'readwrite' %}
-    void {{property.setter_name }}({{ property.arg_type }} value);
+    {{ property.declaration_prefix }} void {{property.setter_name }}({{ property.arg_type }} value) {{- property.declaration_suffix }};
     {%- endif %}
 {% endfor %}
 
