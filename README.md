@@ -28,15 +28,16 @@ from the filename of the class definition.
 
 A class definition must contain the following fields:
 
-- `class`: the name of the generated class
-- `properties`: the list of properties (see below)
+- `class`: the name of the generated class.
+
+- `properties`: the list of properties (see below).
 
 It may also contain the following fields:
 
 - `access`: Can be `private` or `protected`. Access modifier for generated
   member variables. Defaults to `private`.
 
-- `includes`: a list of files to include in the header
+- `includes`: a list of files to include in the header.
 
 - `baseClass`: name of the class to inherit from. Defaults to `QObject`.
 
@@ -56,16 +57,18 @@ It may have the following fields:
 
 - `argType`: The type of the setter argument. If not set qpropgen uses const
   refs for types which are not pointers and not known scalars (int, bool,
-  qreal)
+  qreal).
 
-- `setter_name`: Name of the setter. Defaults to `set<Name>`, so the setter of
+- `setterName`: Name of the setter. Defaults to `set<Name>`, so the setter of
   a property named `foo` will be `setFoo`.
 
-- `var_name`: Name of the variable backing the property. Defaults to `m<Name>`,
+- `varName`: Name of the variable backing the property. Defaults to `m<Name>`,
   so the variable of a property named `foo` will be `mFoo`.
 
 - `impl`: One of `plain` (getter and setter), `virtual` (virtual getter and
-  setter) or `pure` (virtual pure getter and setter)
+  setter) or `pure` (virtual pure getter and setter).
+
+- `value`: The default value of the property.
 
 ## Build system integration
 
