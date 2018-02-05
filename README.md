@@ -36,6 +36,8 @@ It may also contain the following fields:
 - `access`: Can be `private` or `protected`. Access modifier for generated
   member variables. Defaults to `private`.
 
+- `includes`: a list of files to include in the header
+
 ### `properties`
 
 `properties` is an array of property definitions.

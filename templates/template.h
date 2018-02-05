@@ -5,6 +5,10 @@
 
 #include <QObject>
 
+{%- for include in includes %}
+#include <{{include}}>
+{%- endfor %}
+
 class {{ className }} : public QObject {
     Q_OBJECT
 {% for property in properties %}

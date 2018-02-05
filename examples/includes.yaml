@@ -1,0 +1,6 @@
+class: Includes
+includes:
+    - QUrl
+properties:
+    - name: url
+      type: QUrl
