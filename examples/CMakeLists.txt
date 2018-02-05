@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.7)
+project(qpropgen-examples)
+
+find_package(Qt5 REQUIRED Core)
+include(../cmake/qpropgen.cmake)
+
+qpropgen(QPROPGEN_SOURCES
+    basesound.yaml
+    impl.yaml
+    mutability.yaml
+)
+
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
+add_executable(example example.cpp ${QPROPGEN_SOURCES})
+target_link_libraries(example Qt5::Core)

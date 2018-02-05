@@ -2,7 +2,7 @@ class:
     name: Mutability
 properties:
     - name: firstname
-      type: string
+      type: QString
     - name: age
       type: int
       mutability: readonly
