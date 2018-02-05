@@ -79,9 +79,9 @@ class ClassDefinition:
     def __init__(self, filename, dct):
         self.filename_we = get_filename_we(filename)
         self.header = self.filename_we + HEADER_EXT
-        self.class_name = dct['class']['name']
+        self.class_name = dct['class']
 
-        self.access = dct['class'].get('access', DEFAULT_ACCESS)
+        self.access = dct.get('access', DEFAULT_ACCESS)
         if self.access not in VALID_ACCESS_VALUES:
             raise InvalidDefinitionError('Invalid value for access: {}'
                                          .format(self.access))

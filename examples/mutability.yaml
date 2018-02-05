@@ -1,5 +1,4 @@
-class:
-    name: Mutability
+class: Mutability
 properties:
     - name: firstname
       type: QString

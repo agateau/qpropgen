@@ -10,8 +10,7 @@ birthDate properties.
 First create a class definition file named person.yaml with the following
 content:
 
-    class:
-        name: Person
+    class: Person
     properties:
         - name: firstName
           type: QString
@@ -27,16 +26,10 @@ from the filename of the class definition.
 
 ## Class definition syntax
 
-A class definition contains the following fields:
+A class definition must contain the following fields:
 
-- `class`
-- `properties`
-
-### `class`
-
-`class` must contains the following fields:
-
-- `name`: Class name
+- `class`: the name of the generated class
+- `properties`: the list of properties (see below)
 
 It may also contain the following fields:
 

@@ -1,5 +1,4 @@
-class:
-    name: Implementation
+class: Implementation
 properties:
     - name: plain
       type: int

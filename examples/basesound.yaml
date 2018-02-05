@@ -1,5 +1,4 @@
-class:
-    name: BaseSound
+class: BaseSound
 properties:
     - name: baseFrequency
       type: qreal
