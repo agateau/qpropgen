@@ -1,0 +1,7 @@
+class: Defaults
+defaults:
+    type: int
+    impl: virtual
+properties:
+    - name: x
+    - name: y

@@ -27,11 +27,13 @@ IMPL_EXT = '.cpp'
 DEFAULT_ACCESS = 'private'
 VALID_ACCESS_VALUES = {'private', 'protected'}
 
-DEFAULT_MUTABILITY = 'readwrite'
-
-DEFAULT_IMPL = 'plain'
 VIRTUAL_IMPL = 'virtual'
 PURE_IMPL = 'pure'
+
+DEFAULTS = {
+    'mutability': 'readwrite',
+    'impl': 'plain',
+}
 
 
 def get_filename_we(filepath):
@@ -39,36 +41,8 @@ def get_filename_we(filepath):
     return os.path.splitext(filename)[0]
 
 
-def complete_property(property_):
-    """Adds extra fields to property_"""
-    camelcase_name = property_['name'][0].upper() + property_['name'][1:]
-
-    property_.setdefault('setterName', 'set' + camelcase_name)
-
-    type_ = property_['type']
-    need_constref = type_ not in NO_CONST_REF_ARG_TYPES and type_[-1] != '*'
-    if need_constref:
-        arg_type = 'const {}&'.format(type_)
-    else:
-        arg_type = type_
-    property_.setdefault('argType', arg_type)
-
-    property_.setdefault('varName', 'm' + camelcase_name)
-
-    property_.setdefault('mutability', DEFAULT_MUTABILITY)
-
-    impl = property_.setdefault('impl', DEFAULT_IMPL)
-    if impl == VIRTUAL_IMPL:
-        prefix, suffix = 'virtual', ''
-    elif impl == PURE_IMPL:
-        prefix, suffix = 'virtual', ' = 0'
-    else:
-        prefix, suffix = '', ''
-
-    property_['declaration_prefix'] = prefix
-    property_['declaration_suffix'] = suffix
-
-    return property_
+def need_constref(type_):
+    return type_ not in NO_CONST_REF_ARG_TYPES and type_[-1] != '*'
 
 
 class InvalidDefinitionError(Exception):
@@ -88,7 +62,9 @@ class ClassDefinition:
             raise InvalidDefinitionError('Invalid value for access: {}'
                                          .format(self.access))
 
-        self.properties = [complete_property(x) for x in dct['properties']]
+        self._read_defaults(dct)
+        self.properties = [self._complete_property(x) for x in
+                           dct['properties']]
 
     def generate_file(self, template, out_path):
         args = dict(
@@ -103,6 +79,41 @@ class ClassDefinition:
 
         with open(out_path, 'w') as f:
             f.write(template.render(**args))
+
+    def _read_defaults(self, dct):
+        self.defaults = dict(DEFAULTS)
+        self.defaults.update(dct.get('defaults', {}))
+
+    def _complete_property(self, property_dct):
+        """Reads property_dct, merges it with defaults, compute other fields
+        and return the new dictionary"""
+        dct = dict(self.defaults)
+        dct.update(property_dct)
+        camelcase_name = dct['name'][0].upper() + dct['name'][1:]
+
+        dct.setdefault('setterName', 'set' + camelcase_name)
+
+        type_ = dct['type']
+        if need_constref(type_):
+            arg_type = 'const {}&'.format(type_)
+        else:
+            arg_type = type_
+        dct.setdefault('argType', arg_type)
+
+        dct.setdefault('varName', 'm' + camelcase_name)
+
+        impl = dct['impl']
+        if impl == VIRTUAL_IMPL:
+            prefix, suffix = 'virtual', ''
+        elif impl == PURE_IMPL:
+            prefix, suffix = 'virtual', ' = 0'
+        else:
+            prefix, suffix = '', ''
+
+        dct['declaration_prefix'] = prefix
+        dct['declaration_suffix'] = suffix
+
+        return dct
 
 
 def main():

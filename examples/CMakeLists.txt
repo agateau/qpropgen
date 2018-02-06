@@ -6,6 +6,7 @@ include(../cmake/qpropgen.cmake)
 
 qpropgen(QPROPGEN_SOURCES
     basesound.yaml
+    defaults.yaml
     impl.yaml
     includes.yaml
     mutability.yaml

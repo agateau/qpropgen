@@ -41,6 +41,8 @@ It may also contain the following fields:
 
 - `baseClass`: name of the class to inherit from. Defaults to `QObject`.
 
+- `defaults`: default values for properties (see below).
+
 ### `properties`
 
 `properties` is an array of property definitions.
@@ -69,6 +71,11 @@ It may have the following fields:
   setter) or `pure` (virtual pure getter and setter).
 
 - `value`: The default value of the property.
+
+### `defaults`
+
+`defaults` can contain default values for properties. Of course some fields
+like `name` should not have a default.
 
 ## Build system integration
 
