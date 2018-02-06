@@ -5,6 +5,8 @@ properties:
     - name: age
       type: int
       mutability: readonly
+      access: protected
     - name: size
       type: int
       mutability: constant
+      access: protected

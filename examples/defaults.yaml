@@ -2,6 +2,7 @@ class: Defaults
 defaults:
     type: int
     impl: virtual
+    access: protected
 properties:
     - name: x
     - name: y

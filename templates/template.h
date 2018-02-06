@@ -38,10 +38,12 @@ signals:
     void {{property.name }}Changed({{ property.argType }} value);
 {% endfor %}
 
-{{ access }}:
-{% for property in properties %}
+{%- for group in properties|groupby('access') %}
+{{ group.grouper }}:
+    {%- for property in group.list %}
     {{ property.type }} {{ property.varName }}{% if property.value is defined %} = {{ property.value }}{% endif %};
-{% endfor %}
+    {%- endfor %}
+{%- endfor %}
 };
 
 #endif // {{ include_guard }}

@@ -34,9 +34,6 @@ A class definition must contain the following fields:
 
 It may also contain the following fields:
 
-- `access`: Can be `private` or `protected`. Access modifier for generated
-  member variables. Defaults to `private`.
-
 - `includes`: a list of files to include in the header.
 
 - `baseClass`: name of the class to inherit from. Defaults to `QObject`.
@@ -53,6 +50,9 @@ A property definition must contain the following fields:
 - `name`
 
 It may have the following fields:
+
+- `access`: Can be `private` or `protected`. Defines the access modifier for
+  the generated member variables. Defaults to `private`.
 
 - `mutability`: One of `constant`, `readonly`, `readwrite`. Defaults to
   `readwrite`.
