@@ -3,3 +3,5 @@ out
 __pycache__
 *.egg-info
 examples/build
+build
+dist

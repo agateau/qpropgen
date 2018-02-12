@@ -11,11 +11,14 @@ setup(
     author_email='mail@agateau.com',
     license=qpropgen.__license__,
     platforms=['any'],
-    py_modules=['qpropgen'],
+    packages=['qpropgen'],
+    package_data={
+        'qpropgen': ['templates/template.h', 'templates/template.cpp']
+    },
     install_requires=['PyYAML', 'jinja2'],
     entry_points={
         'console_scripts': [
-            'qpropgen = qpropgen:main',
+            'qpropgen = qpropgen.main:main',
         ],
     },
     classifiers=[

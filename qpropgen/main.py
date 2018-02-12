@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import argparse
 import os
 import sys
@@ -7,14 +6,7 @@ import yaml
 
 from jinja2 import Environment, PackageLoader
 
-
-__appname__ = 'qpropgen'
-__version__ = '0.1.0'
-__license__ = 'Apache 2.0'
-
-DESCRIPTION = """\
-Generate QML property-based headers and implementation
-"""
+from qpropgen import DESCRIPTION
 
 NO_CONST_REF_ARG_TYPES = {'int', 'bool', 'qreal'}
 
