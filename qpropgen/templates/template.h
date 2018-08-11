@@ -35,7 +35,7 @@ public:
 
 signals:
 {% for property in properties if property.mutability != 'constant' %}
-    void {{property.name }}Changed({{ property.argType }} value);
+    void {{property.name }}Changed({{ property.argType }} {{ property.name }});
 {% endfor %}
 
 {%- for group in properties|groupby('access') %}
