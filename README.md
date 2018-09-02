@@ -38,7 +38,7 @@ It may also contain the following fields:
 
 - `baseClass`: name of the class to inherit from. Defaults to `QObject`.
 
-- `defaults`: default values for properties (see below).
+- `defaults`: default values for some property attributes (see below).
 
 ### `properties`
 
@@ -76,6 +76,14 @@ It may have the following fields:
 
 `defaults` can contain default values for properties. Of course some fields
 like `name` should not have a default.
+
+For example you can define that all properties are of type `qreal` by default
+with:
+
+```
+defaults:
+    type: qreal
+```
 
 ## Build system integration
 
