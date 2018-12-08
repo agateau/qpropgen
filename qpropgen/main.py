@@ -6,7 +6,8 @@ import yaml
 
 from jinja2 import Environment, PackageLoader
 
-from qpropgen import DESCRIPTION
+DESCRIPTION = 'Generate QML-friendly QObject-based C++ classes from class' \
+    ' definition files'
 
 NO_CONST_REF_ARG_TYPES = {'int', 'bool', 'qreal'}
 
