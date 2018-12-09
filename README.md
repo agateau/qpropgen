@@ -3,6 +3,10 @@
 A tool to generate QML-friendly QObject-based C++ classes from class definition
 files.
 
+Install it with:
+
+    pip install qpropgen
+
 ## Quick Intro
 
 Declaring properties in a QObject class can be tedious: there is quite a lot of
