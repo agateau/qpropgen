@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/agateau/qpropgen.svg?branch=master)](https://travis-ci.org/agateau/qpropgen)
+
 # qpropgen
 
 A tool to generate QML-friendly QObject-based C++ classes from class definition
