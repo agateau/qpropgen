@@ -110,7 +110,7 @@ def main():
     args = parser.parse_args()
 
     with open(args.class_definition, 'r') as f:
-        definition = ClassDefinition(args.class_definition, yaml.load(f))
+        definition = ClassDefinition(args.class_definition, yaml.safe_load(f))
 
     env = Environment(loader=PackageLoader('qpropgen', 'templates'))
 
