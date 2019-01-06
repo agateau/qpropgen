@@ -1,42 +1,36 @@
+git checkout dev
+
 Update CHANGELOG.md:
 
     r!git log --pretty=format:'- \%s (\%an)' x.y.z-1..HEAD
 
 Bump version number in qpropgen/__init__.py
 
+Check/update README.md
+
 Commit
 
-Create tarball:
+Package and run tests
 
-    ./setup.py sdist
+    tox --recreate --skip-missing-interpreters
 
-Install tarball in virtual env:
+Check the content of qpropgen.egg-info/PKG-INFO.
 
-    pew mktmpenv
-    cd /tmp
-    tar xf path/to/qpropgen/dists/qpropgen-$version.tar.gz
-    cd qpropgen-$version
-    ./setup.py install
-
-Run functional tests:
-
-    ./tests.sh
-
-    exit
-
-If OK, create "x.y.z" tag:
-
-    git tag -a x.y.z
-
-Push:
+Push
 
     git push
+
+If Travis is happy:
+
+    git checkout master
+    git pull
+    git merge origin/dev
+
+    ./setup.py sdist
+    version=$(./setup.py --version)
+    git tag -a $version -m "Releasing $version"
+    git push
     git push --tags
-
-Publish on PyPI:
-
-    Check the content of qpropgen.egg-info/PKG-INFO
-
     twine upload dist/qpropgen-$version.tar.gz
 
 Update project page
