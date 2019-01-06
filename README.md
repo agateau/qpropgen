@@ -11,8 +11,8 @@ Install it with:
 
 ## Quick Intro
 
-Declaring properties in a QObject class can be tedious: there is quite a lot of
-boilerplate code to write. qpropgen goal is to write this boilerplate for you.
+Declaring properties in a QObject class requires writing a lot of boilerplate
+code. qpropgen goal is to write this boilerplate for you.
 
 Suppose we want to create a `Person` class, with `firstName`, `lastName` and
 `birthDate` properties.
@@ -20,19 +20,20 @@ Suppose we want to create a `Person` class, with `firstName`, `lastName` and
 First we create a class definition file named `person.yaml` with the following
 content:
 
-    class: Person
-    properties:
-        - name: firstName
-          type: QString
-        - name: lastName
-          type: QString
-        - name: birthDate
-          type: QDateTime
+```yaml
+class: Person
+properties:
+- name: firstName
+  type: QString
+- name: lastName
+  type: QString
+- name: birthDate
+  type: QDateTime
+```
 
-Next, we generate its header and implementation with `qpropgen person.yaml`
-
-Now we can use `person.h` and `person.cpp` in our code. The filenames are
-defined from the filename of the class definition.
+Next, we generate its header and implementation with `qpropgen person.yaml`.
+This produces two files: `person.h` and `person.cpp` (The filenames are based
+on the filename of the class definition).
 
 Note: in practice, you probably want to inherit from the generated classes to
 implement other aspects of the class to create and/or to override getters and
@@ -40,13 +41,13 @@ setters.
 
 ## Syntax of class definition files
 
-A class definition file must contain the following fields:
+A class definition file **must** contain the following fields:
 
 - `class`: the name of the class to generate.
 
 - `properties`: the list of its properties (see below).
 
-It may also contain the following fields:
+It **may** also contain the following fields:
 
 - `includes`: a list of files to include in the header.
 
@@ -58,12 +59,12 @@ It may also contain the following fields:
 
 `properties` is an array of property definitions.
 
-A property definition must contain the following fields:
+A property definition **must** contain the following fields:
 
 - `type`
 - `name`
 
-It may contain the following fields:
+It **may** contain the following fields:
 
 - `access`: Can be `private` or `protected`. Defines the access modifier for
   the generated member variables. Defaults to `private`.
@@ -75,11 +76,11 @@ It may contain the following fields:
   references for types which are not pointers and not known scalars (int, bool,
   qreal).
 
-- `setterName`: Name of the setter. Defaults to `set<Name>`, so the setter of
-  a property named `foo` will be named `setFoo`.
-
 - `varName`: Name of the variable backing the property. Defaults to `m<Name>`,
-  so the variable of a property named `foo` will be named `mFoo`.
+  so the variable of the `foo` property will be `mFoo`.
+
+- `setterName`: Name of the setter. Defaults to `set<Name>`, so the setter of
+  the `foo` property will be `setFoo`.
 
 - `impl`: One of `plain` (getter and setter), `virtual` (virtual getter and
   setter) or `pure` (virtual pure getter and setter).
@@ -94,17 +95,18 @@ properties.
 For example you can define that all properties are of type `qreal` by default
 with:
 
-```
+```yaml
 defaults:
-    type: qreal
+  type: qreal
 ```
 
-Of course some fields like `name` should not have a default.
+Of course fields which require a unique value, like `name`, should not have a
+default.
 
 ## Build system integration
 
 The `cmake/qpropgen.cmake` can be included in your project to integrate
-qpropgen in. It takes care of finding the `qpropgen` executable and provides a
+qpropgen. It takes care of finding the `qpropgen` executable and provides a
 `qpropgen()` CMake function.
 
 This CMake function lets you define .yaml files to process. For example:
