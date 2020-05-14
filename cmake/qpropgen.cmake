@@ -1,8 +1,10 @@
+
 find_program(QPROPGEN_CMD qpropgen)
 if (QPROPGEN_CMD)
     message(STATUS "Found qpropgen: ${QPROPGEN_CMD}")
 else()
-    set(QPROPGEN_CMD python3 "${CMAKE_CURRENT_LIST_DIR}/../qpropgen/fromsrc.py")
+    find_package(Python3 REQUIRED COMPONENTS Interpreter)
+    set(QPROPGEN_CMD ${Python3_EXECUTABLE} "${CMAKE_CURRENT_LIST_DIR}/../qpropgen/fromsrc.py")
     message(STATUS "Using bundled qpropgen from ${QPROPGEN_CMD}")
 endif()
 

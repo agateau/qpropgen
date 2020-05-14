@@ -10,7 +10,7 @@
     return {{ property.varName }};
 }
 
-{%- if property.mutability == 'readwrite' %}
+{%- if property.mutability != 'constant' %}
 void {{ className }}::{{ property.setterName }}({{ property.argType }} value) {
     {% if property.type == 'qreal' %}
     if (qFuzzyCompare({{ property.varName }}, value)) {

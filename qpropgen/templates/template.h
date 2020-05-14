@@ -38,6 +38,14 @@ signals:
     void {{property.name }}Changed({{ property.argType }} {{ property.name }});
 {% endfor %}
 
+protected:
+{% for property in properties %}
+    {# Create a protected setter for readonly properties #}
+    {%- if property.mutability == 'readonly' %}
+    {{ property.declaration_prefix }} void {{property.setterName }}({{ property.argType }} value) {{- property.declaration_suffix }};
+    {%- endif %}
+{% endfor %}
+
 {%- for group in properties|groupby('access') %}
 {{ group.grouper }}:
     {%- for property in group.list %}
