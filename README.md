@@ -83,7 +83,7 @@ It **may** contain the following fields:
   the `foo` property will be `setFoo`.
 
 - `impl`: One of `plain` (getter and setter), `virtual` (virtual getter and
-  setter) or `pure` (virtual pure getter and setter).
+  setter) or `pure` (virtual pure getter and setter). Defaults to `plain`.
 
 - `value`: The default value of the property.
 
