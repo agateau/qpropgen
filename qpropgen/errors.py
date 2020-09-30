@@ -1,0 +1,2 @@
+class QPropgenError(Exception):
+    pass

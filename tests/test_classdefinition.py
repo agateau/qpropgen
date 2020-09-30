@@ -1,4 +1,4 @@
-from qpropgen.main import ClassDefinition, parse_definition_file
+from qpropgen.classdefinition import ClassDefinition
 
 
 def test_classdefinition():
@@ -17,22 +17,3 @@ def test_classdefinition():
     assert firstname_prop["setterName"] == "setFirstName"
     assert firstname_prop["argType"] == "const QString&"
     assert firstname_prop["varName"] == "mFirstName"
-
-
-def test_parse_definition(tmpdir):
-    testpath = tmpdir / "test.yaml"
-    with open(testpath, "w") as f:
-        f.write(
-            """
-class: Person
-properties:
-- name: firstName
-  type: QString
-- name: lastName
-  type: QString
-- name: birthDate
-  type: QDateTime
-            """
-        )
-
-    parse_definition_file(testpath)
