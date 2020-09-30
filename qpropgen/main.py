@@ -2,7 +2,7 @@ import argparse
 import os
 import sys
 
-import yaml
+import strictyaml
 
 from jinja2 import Environment, PackageLoader
 
@@ -103,10 +103,11 @@ class ClassDefinition:
 
 def parse_definition_file(definition_filepath):
     with open(definition_filepath, 'r') as f:
-        try:
-            return yaml.safe_load(f)
-        except Exception as exc:
-            raise QPropgenError("Failed to parse {}: {}".format(definition_filepath, exc))
+        data = f.read()
+    try:
+        return strictyaml.load(data)
+    except Exception as exc:
+        raise QPropgenError("Failed to parse {}: {}".format(definition_filepath, exc))
 
 
 def main():
