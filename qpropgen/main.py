@@ -27,6 +27,10 @@ DEFAULTS = {
 }
 
 
+class QPropgenError(Exception):
+    pass
+
+
 def get_filename_we(filepath):
     filename = os.path.basename(filepath)
     return os.path.splitext(filename)[0]
@@ -97,6 +101,14 @@ class ClassDefinition:
         return dct
 
 
+def parse_definition_file(definition_filepath):
+    with open(definition_filepath, 'r') as f:
+        try:
+            return yaml.safe_load(f)
+        except Exception as exc:
+            raise QPropgenError("Failed to parse {}: {}".format(definition_filepath, exc))
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.description = DESCRIPTION
@@ -109,15 +121,19 @@ def main():
 
     args = parser.parse_args()
 
-    with open(args.class_definition, 'r') as f:
-        definition = ClassDefinition(args.class_definition, yaml.safe_load(f))
+    try:
+        dct = parse_definition_file(args.class_definition)
+        definition = ClassDefinition(args.class_definition, dct)
 
-    env = Environment(loader=PackageLoader('qpropgen', 'templates'))
+        env = Environment(loader=PackageLoader('qpropgen', 'templates'))
 
-    for ext in HEADER_EXT, IMPL_EXT:
-        out_path = os.path.join(args.directory, definition.filename_we + ext)
-        template = env.get_template('template{}'.format(ext))
-        definition.generate_file(template, out_path)
+        for ext in HEADER_EXT, IMPL_EXT:
+            out_path = os.path.join(args.directory, definition.filename_we + ext)
+            template = env.get_template('template{}'.format(ext))
+            definition.generate_file(template, out_path)
+    except QPropgenError as exc:
+        print(exc)
+        return 1
 
     return 0
 
