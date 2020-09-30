@@ -61,8 +61,8 @@ It **may** also contain the following fields:
 
 A property definition **must** contain the following fields:
 
-- `type`
 - `name`
+- `type` (can be set in the `defaults` field)
 
 It **may** contain the following fields:
 
