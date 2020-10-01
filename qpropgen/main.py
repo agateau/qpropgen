@@ -8,8 +8,16 @@ import sys
 from jinja2 import Environment, PackageLoader
 
 from qpropgen.classdefinition import HEADER_EXT, IMPL_EXT, ClassDefinition
-from qpropgen.definitionloader import load_definition_file
+from qpropgen.definitionparser import parse_definition_string
 from qpropgen.errors import QPropgenError
+
+
+def load_definition_file(definition_filepath):
+    try:
+        with open(definition_filepath) as f:
+            return parse_definition_string(f.read())
+    except Exception as exc:
+        raise QPropgenError(f"Failed to read {definition_filepath}: {exc}")
 
 
 def main():

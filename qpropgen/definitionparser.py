@@ -1,6 +1,6 @@
 from strictyaml import load, Map, Seq, Str, Bool, Int, Optional, Enum
 
-from qpropgen.errors import QPropgenError
+from qpropgen.errors import ParseError
 
 VALUE_SCHEMA = Str() | Bool() | Int()
 ACCESS_SCHEMA = Enum(["private", "protected"])
@@ -35,18 +35,16 @@ SCHEMA = Map({
 })
 
 
-def load_definition_file(definition_filepath):
-    with open(definition_filepath, 'r') as f:
-        data = f.read()
+def parse_definition_string(data):
     try:
         dct = load(data, SCHEMA)
     except Exception as exc:
-        raise QPropgenError("Failed to parse {}: {}".format(definition_filepath, exc))
+        raise ParseError(f"Failed to parse definition file: {exc}")
 
     if not "type" in dct.get("defaults", {}):
         # Extra validation which cannot be expressed with strictyaml schema
         for prop in dct["properties"]:
             if "type" not in prop:
-                raise QPropgenError("Missing type for property {}".format(prop["name"]))
+                raise ParseError("Missing type for property {}".format(prop["name"]))
 
     return dct
