@@ -1,0 +1,4 @@
+*
+!ci/*
+!requirements.txt
+!dev-requirements.txt
