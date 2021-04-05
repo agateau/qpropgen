@@ -61,8 +61,8 @@ It **may** also contain the following fields:
 
 A property definition **must** contain the following fields:
 
-- `type`
 - `name`
+- `type` (can be set in the `defaults` field)
 
 It **may** contain the following fields:
 
@@ -126,8 +126,7 @@ the .h and .cpp files produced by qpropgen during the build.
 
 ## Tests
 
-The project currently lacks real unit tests, so the examples serve as tests:
-the `./tests.sh` script can be run to build the examples.
+The `./tests.sh` script runs the unit tests and builds the examples.
 
 ## Trivia
 

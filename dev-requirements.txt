@@ -1,1 +1,2 @@
 setuptools == 40.6.0
+pytest==6.1.0

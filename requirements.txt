@@ -1,2 +1,2 @@
-PyYAML==3.13
 jinja2==2.9.5
+strictyaml==1.1.0
