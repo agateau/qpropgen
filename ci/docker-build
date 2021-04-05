@@ -1,0 +1,19 @@
+#!/bin/bash
+set -euo pipefail
+
+# This script runs inside the Docker image. It expects the source code to be in /src
+cd /src
+
+echo "---> Installing qpropgen"
+pip3 install .
+
+echo "---> Running unit tests"
+pytest
+
+echo "---> Building examples"
+cd /src/examples
+rm -rf build
+mkdir build
+cd build
+cmake -G Ninja ..
+ninja

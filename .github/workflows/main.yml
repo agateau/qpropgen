@@ -1,0 +1,15 @@
+name: main
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create docker image
+        run: ci/build-docker-image
+
+      - name: Build
+        run: ci/build
