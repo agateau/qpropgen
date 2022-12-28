@@ -16,7 +16,7 @@ RUN \
 
 RUN pip3 install --upgrade pip
 
-COPY *requirements.txt /root/
+COPY dev-requirements.txt /root/
 RUN pip3 install -r /root/dev-requirements.txt
 
 ENTRYPOINT ["/bin/bash"]
